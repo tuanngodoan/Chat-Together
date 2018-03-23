@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>214354881933-r8h7mf61fjsoblnfd2i0dijjeb1ktc1t.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.214354881933-r8h7mf61fjsoblnfd2i0dijjeb1ktc1t</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCuGRffS6P5naXv83UlH0tqPcT_GusO6yU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>214354881933</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>team1.ktpm2-k10.haui</string>
+	<key>PROJECT_ID</key>
+	<string>chattogether-4d100</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chattogether-4d100.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:214354881933:ios:805f018c09ed3415</string>
+	<key>DATABASE_URL</key>
+	<string>https://chattogether-4d100.firebaseio.com</string>
+</dict>
+</plist>

@@ -12,15 +12,20 @@
 		303F3610205684D80071BD70 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303F360D205684D80071BD70 /* ChatViewController.swift */; };
 		303F3611205684D80071BD70 /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303F360E205684D80071BD70 /* ChannelListViewController.swift */; };
 		303F3612205684D80071BD70 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303F360F205684D80071BD70 /* LoginViewController.swift */; };
-		303F3614205684F40071BD70 /* CreateChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303F3613205684F40071BD70 /* CreateChannelCell.swift */; };
 		303F361E205685DC0071BD70 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303F3616205685DB0071BD70 /* UIImage+Gif.swift */; };
 		303F361F205685DC0071BD70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 303F3617205685DB0071BD70 /* GoogleService-Info.plist */; };
 		303F3620205685DC0071BD70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303F3618205685DB0071BD70 /* AppDelegate.swift */; };
 		303F3621205685DC0071BD70 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303F3619205685DB0071BD70 /* AppConfig.swift */; };
 		303F3622205685DC0071BD70 /* License in Resources */ = {isa = PBXBuildFile; fileRef = 303F361B205685DC0071BD70 /* License */; };
+		3045B84A207BB8BF007F808F /* SearchUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3045B848207BB8BF007F808F /* SearchUserTableViewController.swift */; };
+		3045B84D207BBEB0007F808F /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3045B84C207BBEB0007F808F /* UserDetailViewController.swift */; };
 		307D58362057C71E00BA0B83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 307D58352057C71E00BA0B83 /* Assets.xcassets */; };
 		307D58392057D66E00BA0B83 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307D58382057D66E00BA0B83 /* Utils.swift */; };
 		307D583B2057D68400BA0B83 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307D583A2057D68400BA0B83 /* Constant.swift */; };
+		3084F09A20923ED9009B9E21 /* ExitsUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3084F09820923ED9009B9E21 /* ExitsUsersCell.swift */; };
+		3084F09B20923ED9009B9E21 /* ExitsUsersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3084F09920923ED9009B9E21 /* ExitsUsersCell.xib */; };
+		3084F09E20923F15009B9E21 /* FindUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3084F09C20923F15009B9E21 /* FindUserCell.swift */; };
+		3084F09F20923F15009B9E21 /* FindUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3084F09D20923F15009B9E21 /* FindUserCell.xib */; };
 		BB53557F1BEF765800321277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB53557D1BEF765800321277 /* Main.storyboard */; };
 		BB5355841BEF765800321277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5355821BEF765800321277 /* LaunchScreen.storyboard */; };
 		EABD61331C11C39B8B7802C6 /* Pods_ChatChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264333317F05D83ABA2F87DC /* Pods_ChatChat.framework */; };
@@ -34,7 +39,6 @@
 		303F360D205684D80071BD70 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = Controller/ChatViewController.swift; sourceTree = "<group>"; };
 		303F360E205684D80071BD70 /* ChannelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelListViewController.swift; path = Controller/ChannelListViewController.swift; sourceTree = "<group>"; };
 		303F360F205684D80071BD70 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controller/LoginViewController.swift; sourceTree = "<group>"; };
-		303F3613205684F40071BD70 /* CreateChannelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateChannelCell.swift; path = Layout/CreateChannelCell.swift; sourceTree = "<group>"; };
 		303F3615205685DB0071BD70 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		303F3616205685DB0071BD70 /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Gif.swift"; path = "Supporting Files/UIImage+Gif.swift"; sourceTree = "<group>"; };
 		303F3617205685DB0071BD70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ChatChat/Supporting Files/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -42,9 +46,15 @@
 		303F3619205685DB0071BD70 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppConfig.swift; path = "Supporting Files/AppConfig.swift"; sourceTree = "<group>"; };
 		303F361B205685DC0071BD70 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = License; path = "Supporting Files/License"; sourceTree = "<group>"; };
 		303F361C205685DC0071BD70 /* ChatChat-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ChatChat-Bridging-Header.h"; path = "Supporting Files/ChatChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		3045B848207BB8BF007F808F /* SearchUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchUserTableViewController.swift; path = Controller/SearchUserTableViewController.swift; sourceTree = "<group>"; };
+		3045B84C207BBEB0007F808F /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDetailViewController.swift; path = Controller/UserDetailViewController.swift; sourceTree = "<group>"; };
 		307D58352057C71E00BA0B83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		307D58382057D66E00BA0B83 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Common/Utils.swift; sourceTree = "<group>"; };
 		307D583A2057D68400BA0B83 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constant.swift; path = Common/Constant.swift; sourceTree = "<group>"; };
+		3084F09820923ED9009B9E21 /* ExitsUsersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExitsUsersCell.swift; path = Layout/ExitsUsersCell.swift; sourceTree = "<group>"; };
+		3084F09920923ED9009B9E21 /* ExitsUsersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExitsUsersCell.xib; path = Layout/ExitsUsersCell.xib; sourceTree = "<group>"; };
+		3084F09C20923F15009B9E21 /* FindUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserCell.swift; path = Layout/FindUserCell.swift; sourceTree = "<group>"; };
+		3084F09D20923F15009B9E21 /* FindUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FindUserCell.xib; path = Layout/FindUserCell.xib; sourceTree = "<group>"; };
 		3096461B205686E2000CC403 /* ChatChat.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = ChatChat.entitlements; path = ChatChat/ChatChat.entitlements; sourceTree = "<group>"; };
 		BB5355761BEF765800321277 /* ChatChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB53557E1BEF765800321277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -109,6 +119,7 @@
 				3096461B205686E2000CC403 /* ChatChat.entitlements */,
 				303F3617205685DB0071BD70 /* GoogleService-Info.plist */,
 				BB5355781BEF765800321277 /* ChatChat */,
+				BB5355911BEF817A00321277 /* Supporting Files */,
 				BB5355771BEF765800321277 /* Products */,
 				97CEDEF6DA0B51A3522B766A /* Frameworks */,
 				B30560C6A5E5FFDB3860EED5 /* Pods */,
@@ -130,7 +141,6 @@
 				45A0D8FF1D4BB5DD00F26729 /* Model */,
 				BB5355901BEF816500321277 /* Controller */,
 				BB5355921BEF818700321277 /* Layout */,
-				BB5355911BEF817A00321277 /* Supporting Files */,
 			);
 			path = ChatChat;
 			sourceTree = "<group>";
@@ -141,6 +151,10 @@
 				303F360E205684D80071BD70 /* ChannelListViewController.swift */,
 				303F360D205684D80071BD70 /* ChatViewController.swift */,
 				303F360F205684D80071BD70 /* LoginViewController.swift */,
+				3045B848207BB8BF007F808F /* SearchUserTableViewController.swift */,
+				3045B84C207BBEB0007F808F /* UserDetailViewController.swift */,
+				3084F09C20923F15009B9E21 /* FindUserCell.swift */,
+				3084F09820923ED9009B9E21 /* ExitsUsersCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -157,14 +171,16 @@
 				307D58352057C71E00BA0B83 /* Assets.xcassets */,
 			);
 			name = "Supporting Files";
+			path = ChatChat;
 			sourceTree = "<group>";
 		};
 		BB5355921BEF818700321277 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				303F3613205684F40071BD70 /* CreateChannelCell.swift */,
 				BB53557D1BEF765800321277 /* Main.storyboard */,
 				BB5355821BEF765800321277 /* LaunchScreen.storyboard */,
+				3084F09920923ED9009B9E21 /* ExitsUsersCell.xib */,
+				3084F09D20923F15009B9E21 /* FindUserCell.xib */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
@@ -239,9 +255,11 @@
 			files = (
 				BB5355841BEF765800321277 /* LaunchScreen.storyboard in Resources */,
 				303F3622205685DC0071BD70 /* License in Resources */,
+				3084F09B20923ED9009B9E21 /* ExitsUsersCell.xib in Resources */,
 				BB53557F1BEF765800321277 /* Main.storyboard in Resources */,
 				307D58362057C71E00BA0B83 /* Assets.xcassets in Resources */,
 				303F361F205685DC0071BD70 /* GoogleService-Info.plist in Resources */,
+				3084F09F20923F15009B9E21 /* FindUserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,10 +344,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				303F3621205685DC0071BD70 /* AppConfig.swift in Sources */,
+				3045B84A207BB8BF007F808F /* SearchUserTableViewController.swift in Sources */,
+				3045B84D207BBEB0007F808F /* UserDetailViewController.swift in Sources */,
 				303F3620205685DC0071BD70 /* AppDelegate.swift in Sources */,
 				303F3612205684D80071BD70 /* LoginViewController.swift in Sources */,
-				303F3614205684F40071BD70 /* CreateChannelCell.swift in Sources */,
 				303F361E205685DC0071BD70 /* UIImage+Gif.swift in Sources */,
+				3084F09A20923ED9009B9E21 /* ExitsUsersCell.swift in Sources */,
+				3084F09E20923F15009B9E21 /* FindUserCell.swift in Sources */,
 				307D58392057D66E00BA0B83 /* Utils.swift in Sources */,
 				303F360C205684C60071BD70 /* Channel.swift in Sources */,
 				303F360B205684C60071BD70 /* User.swift in Sources */,

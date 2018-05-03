@@ -9,10 +9,10 @@ class ChannelListViewController: UITableViewController {
     var newChannelTextField: UITextField?
     
     private var channelRefHandle: FIRDatabaseHandle?
-    private var channels: [Channel] = []
+    static var channels: [Channel] = []
     
-    private lazy var channelRef: FIRDatabaseReference = FIRDatabase.database().reference().child("channels")
-    
+    private lazy var channelRef: FIRDatabaseReference = FIRDatabase.database().reference().child("\(CHATHISTORY)/\(AppConfig.USER_ID)")
+    private lazy var channelFriendRef: FIRDatabaseReference = FIRDatabase.database().reference().child("\(CHATHISTORY)")
     // MARK: View Lifecycle
     
     override func viewDidLoad() {
@@ -27,6 +27,8 @@ class ChannelListViewController: UITableViewController {
         if let refHandle = channelRefHandle {
             channelRef.removeObserver(withHandle: refHandle)
         }
+        removeAllChannels()
+        
     }
     
     // MARK :Actions
@@ -49,13 +51,16 @@ class ChannelListViewController: UITableViewController {
         channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot) -> Void in
             let channelData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
-            if let name = channelData["name"] as! String!, name.characters.count > 0 {
-                self.channels.append(Channel(id: id, name: name))
-                self.tableView.reloadData()
-            } else {
-                print("Error! Could not decode channel data")
-            }
+            guard let name = channelData["name"] as? String else {return}
+            guard let receiveID = channelData["receiveID"] as? String else {return}
+            ChannelListViewController.channels.append(Channel(id: id, name: name, receiveID: receiveID))
+            self.tableView.reloadData()
         })
+    }
+    
+    
+    private func removeAllChannels() {
+        ChannelListViewController.channels.removeAll()
     }
     
     // MARK: - logout google firebase
@@ -81,26 +86,27 @@ class ChannelListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channels.count
+        return ChannelListViewController.channels.count
         
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let reuseIdentifier = "ExistingChannel"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = channels[(indexPath as NSIndexPath).row].name
+        cell.textLabel?.text = ChannelListViewController.channels[(indexPath as NSIndexPath).row].name
         return cell
     }
     
     // MARK: UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let channel = channels[(indexPath as NSIndexPath).row]
+        let channel = ChannelListViewController.channels[(indexPath as NSIndexPath).row]
         
         if let chatVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
             chatVC.senderDisplayName = senderDisplayName
             chatVC.channel = channel
             chatVC.channelRef = channelRef.child(channel.id)
+            chatVC.channelFriendRef = channelFriendRef.child(channel.receiveID).child(channel.id)
             self.navigationController?.pushViewController(chatVC, animated: true)
         }
     }

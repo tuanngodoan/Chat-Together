@@ -14,4 +14,6 @@ class Constant: NSObject {
     static let userName            = "userName"
     static let email               = "email"
     static let urlImageProfile     = "urlImageProfile"
+    static let receiveID           = "receiveID"
+    static let name                = "name"
 }

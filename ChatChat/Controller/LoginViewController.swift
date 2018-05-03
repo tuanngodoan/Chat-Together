@@ -108,6 +108,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             guard let email = userInfo.email   else {return}
             guard let url = userInfo.urlImage  else {return}
             
+            //save Data local
+            AppConfig.USER_ID   = id
+            AppConfig.USER_NAME = name
+            
+            //saveData to fireBase
             userIdRef.setValue([Constant.userName: name, Constant.email: email, Constant.urlImageProfile: url])
         }
     }

@@ -42,9 +42,19 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XsV-Xl-hDQ">
+                        <rect key="frame" x="8" y="87" width="358" height="2"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="vzQ-ln-b47"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="XsV-Xl-hDQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="1bJ-PZ-dnl"/>
+                    <constraint firstAttribute="bottom" secondItem="XsV-Xl-hDQ" secondAttribute="bottom" constant="0.5" id="7Be-6s-XMG"/>
                     <constraint firstItem="Gfl-D9-d9W" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Ash-OS-RQ8"/>
+                    <constraint firstAttribute="trailing" secondItem="XsV-Xl-hDQ" secondAttribute="trailing" constant="9" id="H38-Pg-idb"/>
                     <constraint firstItem="4j0-t7-Eg3" firstAttribute="top" secondItem="Gfl-D9-d9W" secondAttribute="bottom" constant="8" id="Lym-t0-ADR"/>
                     <constraint firstAttribute="trailing" secondItem="Gfl-D9-d9W" secondAttribute="trailing" constant="15" id="R86-oc-37U"/>
                     <constraint firstItem="4j0-t7-Eg3" firstAttribute="leading" secondItem="UhV-a4-fg3" secondAttribute="trailing" constant="15" id="TC4-B9-oFF"/>

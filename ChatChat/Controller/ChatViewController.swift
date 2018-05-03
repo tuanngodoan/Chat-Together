@@ -9,8 +9,12 @@ final class ChatViewController: JSQMessagesViewController {
     private let imageURLNotSetKey = "NOTSET"
     
     var channelRef: FIRDatabaseReference?
+    var channelFriendRef: FIRDatabaseReference?
     
     private lazy var messageRef: FIRDatabaseReference = self.channelRef!.child("messages")
+    private lazy var messageFriendRef: FIRDatabaseReference = self.channelFriendRef!.child("messages")
+    
+    
     fileprivate lazy var storageRef: FIRStorageReference = FIRStorage.storage().reference(forURL: "gs://chattogether-4d100.appspot.com")
     private lazy var userIsTypingRef: FIRDatabaseReference = self.channelRef!.child("typingIndicator").child(self.senderId)
     private lazy var usersTypingQuery: FIRDatabaseQuery = self.channelRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
@@ -218,6 +222,7 @@ final class ChatViewController: JSQMessagesViewController {
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         // 1
         let itemRef = messageRef.childByAutoId()
+        let itemFriendRef = messageFriendRef.childByAutoId()
         
         // 2
         let messageItem = [
@@ -228,6 +233,7 @@ final class ChatViewController: JSQMessagesViewController {
         
         // 3
         itemRef.setValue(messageItem)
+        itemFriendRef.setValue(messageItem)
         
         // 4
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
@@ -239,6 +245,7 @@ final class ChatViewController: JSQMessagesViewController {
     
     func sendPhotoMessage() -> String? {
         let itemRef = messageRef.childByAutoId()
+        let itemFriendRef = messageFriendRef.childByAutoId()
         
         let messageItem = [
             "photoURL": imageURLNotSetKey,
@@ -246,6 +253,7 @@ final class ChatViewController: JSQMessagesViewController {
             ]
         
         itemRef.setValue(messageItem)
+        itemFriendRef.setValue(messageItem)
         
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         

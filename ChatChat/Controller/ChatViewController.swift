@@ -16,8 +16,12 @@ final class ChatViewController: JSQMessagesViewController {
     
     
     fileprivate lazy var storageRef: FIRStorageReference = FIRStorage.storage().reference(forURL: "gs://chattogether-4d100.appspot.com")
+    
     private lazy var userIsTypingRef: FIRDatabaseReference = self.channelRef!.child("typingIndicator").child(self.senderId)
     private lazy var usersTypingQuery: FIRDatabaseQuery = self.channelRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
+    
+    private lazy var userIsTypingFriendRef: FIRDatabaseReference = self.channelFriendRef!.child("typingIndicator").child(self.senderId)
+    private lazy var usersTypingFriendQuery: FIRDatabaseQuery = self.channelFriendRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
     
     private var newMessageRefHandle: FIRDatabaseHandle?
     private var updatedMessageRefHandle: FIRDatabaseHandle?
@@ -38,7 +42,7 @@ final class ChatViewController: JSQMessagesViewController {
         }
         set {
             localTyping = newValue
-            userIsTypingRef.setValue(newValue)
+            userIsTypingFriendRef.setValue(newValue)
         }
     }
     
@@ -202,17 +206,15 @@ final class ChatViewController: JSQMessagesViewController {
     
     private func observeTyping() {
         let typingIndicatorRef = channelRef!.child("typingIndicator")
-        userIsTypingRef = typingIndicatorRef.child(senderId)
+        userIsTypingRef = typingIndicatorRef.child(self.senderId)
         userIsTypingRef.onDisconnectRemoveValue()
         usersTypingQuery = typingIndicatorRef.queryOrderedByValue().queryEqual(toValue: true)
         
         usersTypingQuery.observe(.value) { (data: FIRDataSnapshot) in
-            
-            // You're the only typing, don't show the indicator
-            if data.childrenCount == 1 && self.isTyping {
-                return
-            }
-            
+//            if data.childrenCount == 1 && self.isTyping {
+//                return
+//            }
+        
             // Are there others typing?
             self.showTypingIndicator = data.childrenCount > 0
             self.scrollToBottom(animated: true)

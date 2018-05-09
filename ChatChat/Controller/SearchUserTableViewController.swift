@@ -8,17 +8,21 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 enum Section: Int {
     case findUserByEmail = 0
     case currentUsersSection
 }
 
-class SearchUserTableViewController: UITableViewController {
+class SearchUserTableViewController: UITableViewController, FindUserDelegate {
     
     private var userRefHandle: FIRDatabaseHandle?
     private var channelRefHandle: FIRDatabaseHandle?
-    private var users:[User] = []
+    private var users:[User]        = []
+    private var usersSearch:[User]  = []
+    private var usersAll:[User]     = []
+    private var isSearching: Bool = false
     
     private lazy var userRef: FIRDatabaseReference = FIRDatabase.database().reference().child("users")
     private lazy var channelRef: FIRDatabaseReference = FIRDatabase.database().reference().child("chatHistory")
@@ -64,45 +68,60 @@ class SearchUserTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var numberOfRows: Int = 0
         if let currentSection: Section = Section(rawValue: section) {
             switch currentSection {
             case .findUserByEmail:
-                return 1
+                numberOfRows =  1
             case .currentUsersSection:
-                return users.count
+                if isSearching == true {
+                    numberOfRows = usersSearch.count
+                } else {
+                    numberOfRows =  users.count
+                }
             }
-        } else {
-            return 0
         }
+        return numberOfRows
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let reuseIdentifier = (indexPath as NSIndexPath).section == Section.findUserByEmail.rawValue ? "FindUser" : "ExitsUsers"
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
         if (indexPath as NSIndexPath).section == Section.findUserByEmail.rawValue {
             if let findUserCell = cell as? FindUserCell {
+                findUserCell.findingUserDelegate = self
                 return findUserCell
             }
         } else if (indexPath as NSIndexPath).section == Section.currentUsersSection.rawValue {
             if let exitsUsersCell = cell as? ExitsUsersCell {
-                if users.count > 0 {
-                    exitsUsersCell.setUserInfo(user: users[indexPath.row])
-                    return exitsUsersCell
+                if isSearching == true {
+                    if usersSearch.count > 0 {
+                        exitsUsersCell.setUserInfo(user: usersSearch[indexPath.row])
+                        return exitsUsersCell
+                    }
+                } else {
+                    if users.count > 0 {
+                        exitsUsersCell.setUserInfo(user: users[indexPath.row])
+                        return exitsUsersCell
+                    }
                 }
             }
         }
-        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let user = users[indexPath.row]
+        var user:User?
         
-        createChannel(user: user)
-        
+        if isSearching == true {
+           user = usersSearch[indexPath.row]
+        } else {
+           user = users[indexPath.row]
+        }
+        createChannel(user: user!)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -111,7 +130,8 @@ class SearchUserTableViewController: UITableViewController {
             
             guard let friendName = user.fullName else {return}
             guard let friendID  = user.userId else {return}
-            let channel = Channel(id: channelID, name: friendName, receiveID: friendID)
+            guard let urlImage = user.urlImage else {return}
+            let channel = Channel(id: channelID, name: friendName, receiveID: friendID, receiveUrlImage: urlImage, lastMessage: "")
             
             chatVC.channel = channel
             chatVC.senderDisplayName = AppConfig.USER_NAME
@@ -126,11 +146,11 @@ class SearchUserTableViewController: UITableViewController {
         
         guard let friendID = user.userId     else {return}
         guard let friendName = user.fullName else {return}
+        guard let urlImage = user.urlImage else {return}
+        let lastMessage = ""
         
         let channelID = "\(AppConfig.USER_ID)_\(friendID)"
         let channelIDReverse = ("\(friendID)_\(AppConfig.USER_ID)")
-        
-        
         
         if checkChannelIsExits(channelID: channelID, channelIDReverse: channelIDReverse) {
             guard let id = getChannelID(channelID: channelID, channelIDReverse: channelIDReverse) else {return}
@@ -140,11 +160,11 @@ class SearchUserTableViewController: UITableViewController {
         
         // with user
         let userRef = self.channelRef.child(AppConfig.USER_ID).child(channelID)
-        userRef.setValue([Constant.receiveID : friendID, Constant.name : friendName]) { (error, firDataReference) in
+        userRef.setValue([Constant.receiveID : friendID, Constant.name : friendName, Constant.urlImageProfile: urlImage, "lastMessage" : ""]) { (error, firDataReference) in
             if error == nil {
                 // with friend
                 let friendRef = self.channelRef.child(friendID).child(channelID)
-                friendRef.setValue([Constant.receiveID : AppConfig.USER_ID, Constant.name : AppConfig.USER_NAME], withCompletionBlock: { (error, firDataReference) in
+                friendRef.setValue([Constant.receiveID : AppConfig.USER_ID, Constant.name : AppConfig.USER_NAME, Constant.urlImageProfile: AppConfig.USER_URL_IMAGE,  "lastMessage" : ""], withCompletionBlock: { (error, firDataReference) in
                     if error == nil {
                         self.pushToChatVC(user: user, channelID: channelID)
                     }
@@ -168,4 +188,20 @@ class SearchUserTableViewController: UITableViewController {
         }
         return false
     }
+    
+    func findingUser(text: String) {
+        if text == "" {
+            isSearching = false
+        } else {
+            isSearching = true
+            self.usersSearch.removeAll()
+            for user in users {
+                if text == user.email! {
+                    usersSearch.append(user)
+                }
+            }
+        }
+        self.tableView.reloadData()
+    }
+    
 }

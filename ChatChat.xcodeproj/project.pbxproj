@@ -26,6 +26,8 @@
 		3084F09B20923ED9009B9E21 /* ExitsUsersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3084F09920923ED9009B9E21 /* ExitsUsersCell.xib */; };
 		3084F09E20923F15009B9E21 /* FindUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3084F09C20923F15009B9E21 /* FindUserCell.swift */; };
 		3084F09F20923F15009B9E21 /* FindUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3084F09D20923F15009B9E21 /* FindUserCell.xib */; };
+		308532F120A046D7002C3C35 /* ExistingChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308532EF20A046D7002C3C35 /* ExistingChannelCell.swift */; };
+		308532F220A046D7002C3C35 /* ExistingChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 308532F020A046D7002C3C35 /* ExistingChannelCell.xib */; };
 		BB53557F1BEF765800321277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB53557D1BEF765800321277 /* Main.storyboard */; };
 		BB5355841BEF765800321277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5355821BEF765800321277 /* LaunchScreen.storyboard */; };
 		EABD61331C11C39B8B7802C6 /* Pods_ChatChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264333317F05D83ABA2F87DC /* Pods_ChatChat.framework */; };
@@ -55,6 +57,8 @@
 		3084F09920923ED9009B9E21 /* ExitsUsersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExitsUsersCell.xib; path = Layout/ExitsUsersCell.xib; sourceTree = "<group>"; };
 		3084F09C20923F15009B9E21 /* FindUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserCell.swift; path = Layout/FindUserCell.swift; sourceTree = "<group>"; };
 		3084F09D20923F15009B9E21 /* FindUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FindUserCell.xib; path = Layout/FindUserCell.xib; sourceTree = "<group>"; };
+		308532EF20A046D7002C3C35 /* ExistingChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExistingChannelCell.swift; path = Controller/ExistingChannelCell.swift; sourceTree = "<group>"; };
+		308532F020A046D7002C3C35 /* ExistingChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExistingChannelCell.xib; path = Controller/ExistingChannelCell.xib; sourceTree = "<group>"; };
 		3096461B205686E2000CC403 /* ChatChat.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = ChatChat.entitlements; path = ChatChat/ChatChat.entitlements; sourceTree = "<group>"; };
 		BB5355761BEF765800321277 /* ChatChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB53557E1BEF765800321277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				3045B84C207BBEB0007F808F /* UserDetailViewController.swift */,
 				3084F09C20923F15009B9E21 /* FindUserCell.swift */,
 				3084F09820923ED9009B9E21 /* ExitsUsersCell.swift */,
+				308532EF20A046D7002C3C35 /* ExistingChannelCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				BB5355821BEF765800321277 /* LaunchScreen.storyboard */,
 				3084F09920923ED9009B9E21 /* ExitsUsersCell.xib */,
 				3084F09D20923F15009B9E21 /* FindUserCell.xib */,
+				308532F020A046D7002C3C35 /* ExistingChannelCell.xib */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
@@ -257,6 +263,7 @@
 				303F3622205685DC0071BD70 /* License in Resources */,
 				3084F09B20923ED9009B9E21 /* ExitsUsersCell.xib in Resources */,
 				BB53557F1BEF765800321277 /* Main.storyboard in Resources */,
+				308532F220A046D7002C3C35 /* ExistingChannelCell.xib in Resources */,
 				307D58362057C71E00BA0B83 /* Assets.xcassets in Resources */,
 				303F361F205685DC0071BD70 /* GoogleService-Info.plist in Resources */,
 				3084F09F20923F15009B9E21 /* FindUserCell.xib in Resources */,
@@ -355,6 +362,7 @@
 				303F360C205684C60071BD70 /* Channel.swift in Sources */,
 				303F360B205684C60071BD70 /* User.swift in Sources */,
 				307D583B2057D68400BA0B83 /* Constant.swift in Sources */,
+				308532F120A046D7002C3C35 /* ExistingChannelCell.swift in Sources */,
 				303F3610205684D80071BD70 /* ChatViewController.swift in Sources */,
 				303F3611205684D80071BD70 /* ChannelListViewController.swift in Sources */,
 			);

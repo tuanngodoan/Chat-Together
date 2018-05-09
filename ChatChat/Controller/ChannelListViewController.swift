@@ -6,7 +6,6 @@ class ChannelListViewController: UITableViewController {
     
     // MARK: Properties
     var senderDisplayName: String?
-    var newChannelTextField: UITextField?
     
     private var channelRefHandle: FIRDatabaseHandle?
     static var channels: [Channel] = []
@@ -19,7 +18,7 @@ class ChannelListViewController: UITableViewController {
         super.viewDidLoad()
         title = "List Messages"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"logout"), style: .plain, target: self, action: #selector(logout(_:)))
-        
+        self.tableView.register(UINib(nibName: "ExistingChannelCell", bundle: nil), forCellReuseIdentifier: "ExistingChannel")
         observeChannels()
     }
     
@@ -29,18 +28,6 @@ class ChannelListViewController: UITableViewController {
         }
         removeAllChannels()
         
-    }
-    
-    // MARK :Actions
-    
-    @IBAction func createChannel(_ sender: AnyObject) {
-        if let name = newChannelTextField?.text {
-            let newChannelRef = channelRef.childByAutoId()
-            let channelItem = [
-                "name": name
-            ]
-            newChannelRef.setValue(channelItem)
-        }
     }
     
     // MARK: Firebase related methods
@@ -53,11 +40,33 @@ class ChannelListViewController: UITableViewController {
             let id = snapshot.key
             guard let name = channelData["name"] as? String else {return}
             guard let receiveID = channelData["receiveID"] as? String else {return}
-            ChannelListViewController.channels.append(Channel(id: id, name: name, receiveID: receiveID))
+            guard let urlImage  = channelData[Constant.urlImageProfile] as? String else {return}
+            guard let lastMessage = channelData["lastMessage"] as? String else {return}
+            
+            ChannelListViewController.channels.append(Channel(id: id, name: name, receiveID: receiveID, receiveUrlImage: urlImage, lastMessage: lastMessage))
+            self.tableView.reloadData()
+        })
+        
+        channelRefHandle = channelRef.observe(.childChanged, with: { (snapshot) -> Void in
+            let channelData = snapshot.value as! Dictionary<String, AnyObject>
+            let id = snapshot.key
+            guard let name = channelData["name"] as? String else {return}
+            guard let receiveID = channelData["receiveID"] as? String else {return}
+            guard let urlImage  = channelData[Constant.urlImageProfile] as? String else {return}
+            guard let lastMessage = channelData["lastMessage"] as? String else {return}
+            
+            for channel in ChannelListViewController.channels {
+                if channel.id == id {
+                    channel.lastMessage = lastMessage
+                }
+            }
+            
+            //ChannelListViewController.channels.append(Channel(id: id, name: name, receiveID: receiveID, receiveUrlImage: urlImage, lastMessage: lastMessage))
             self.tableView.reloadData()
         })
     }
     
+    //private func getLastMessage()
     
     private func removeAllChannels() {
         ChannelListViewController.channels.removeAll()
@@ -92,9 +101,9 @@ class ChannelListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let reuseIdentifier = "ExistingChannel"
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = ChannelListViewController.channels[(indexPath as NSIndexPath).row].name
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ExistingChannelCell
+        cell?.configChannel(channel: ChannelListViewController.channels[(indexPath as NSIndexPath).row])
+        return cell!
     }
     
     // MARK: UITableViewDelegate
@@ -109,5 +118,7 @@ class ChannelListViewController: UITableViewController {
             chatVC.channelFriendRef = channelFriendRef.child(channel.receiveID).child(channel.id)
             self.navigationController?.pushViewController(chatVC, animated: true)
         }
+        
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }

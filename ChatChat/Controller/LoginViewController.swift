@@ -51,6 +51,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
     
     // Dismiss the "Sign in with Google" view
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
+        SVProgressHUD.dismiss()
+        setUpLayer()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -74,6 +76,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
                                                                                 accessToken: authentication.accessToken)
             self.loginToFIR(credential: credential)
         } else {
+            SVProgressHUD.dismiss()
             print("\(error.localizedDescription)")
         }
     }
@@ -87,8 +90,8 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
 
     
     func loginToFIR(credential: FIRAuthCredential) {
+        SVProgressHUD.dismiss()
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
-            SVProgressHUD.dismiss()
             if let err:Error = error {
                 print(err.localizedDescription)
                 return
@@ -109,8 +112,9 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDeleg
             guard let url = userInfo.urlImage  else {return}
             
             //save Data local
-            AppConfig.USER_ID   = id
-            AppConfig.USER_NAME = name
+            AppConfig.USER_ID           = id
+            AppConfig.USER_NAME         = name
+            AppConfig.USER_URL_IMAGE    = url
             
             //saveData to fireBase
             userIdRef.setValue([Constant.userName: name, Constant.email: email, Constant.urlImageProfile: url])

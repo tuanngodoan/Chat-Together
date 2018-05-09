@@ -233,6 +233,18 @@ final class ChatViewController: JSQMessagesViewController {
             "text": text!,
             ]
         
+        let lastMessageItem = [
+            "lastMessage" : senderDisplayName == AppConfig.USER_NAME ? "Bạn: \(text!)" : text!
+        ]
+        
+        channelRef?.updateChildValues(lastMessageItem)
+        
+        let lastMessageFriendItem = [
+            "lastMessage" : senderDisplayName == AppConfig.USER_NAME ? text! : "Bạn: \(text!)"
+        ]
+        
+        channelFriendRef?.updateChildValues(lastMessageFriendItem)
+        
         // 3
         itemRef.setValue(messageItem)
         itemFriendRef.setValue(messageItem)
@@ -253,6 +265,18 @@ final class ChatViewController: JSQMessagesViewController {
             "photoURL": imageURLNotSetKey,
             "senderId": senderId!,
             ]
+        
+        let lastMessageItem = [
+            "lastMessage" : senderDisplayName == AppConfig.USER_NAME ? "Bạn: Đã gửi một ảnh" : "Đã gửi một ảnh"
+        ]
+        
+        channelRef?.updateChildValues(lastMessageItem)
+        
+        let lastMessageFriendItem = [
+            "lastMessage" : senderDisplayName == AppConfig.USER_NAME ? "Đã gửi một ảnh" : "Bạn: Đã gửi một ảnh"
+        ]
+        
+        channelFriendRef?.updateChildValues(lastMessageFriendItem)
         
         itemRef.setValue(messageItem)
         itemFriendRef.setValue(messageItem)
